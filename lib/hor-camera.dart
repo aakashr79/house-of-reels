@@ -22,7 +22,7 @@ class _CameraAppState extends State<CameraApp> {
 
   getCamera() {
     final frontCams = widget.cameras
-        .where((element) => element.lensDirection == CameraLensDirection.front);
+        .where((element) => element.lensDirection == CameraLensDirection.back);
     return frontCams.isNotEmpty ? frontCams.first : widget.cameras.first;
   }
 
