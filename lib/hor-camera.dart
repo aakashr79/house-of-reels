@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +9,8 @@ class CameraApp extends StatefulWidget {
 
   /// Default Constructor
   const CameraApp({
-    super.key, required this.cameras,
+    super.key,
+    required this.cameras,
   });
 
   @override
@@ -17,10 +20,17 @@ class CameraApp extends StatefulWidget {
 class _CameraAppState extends State<CameraApp> {
   late CameraController controller;
 
+  getCamera() {
+    final frontCams = widget.cameras
+        .where((element) => element.lensDirection == CameraLensDirection.front);
+    return frontCams.isNotEmpty ? frontCams.first : widget.cameras.first;
+  }
+
   @override
   void initState() {
     super.initState();
-    controller = CameraController(widget.cameras[0], ResolutionPreset.max);
+
+    controller = CameraController(getCamera(), ResolutionPreset.max);
     controller.initialize().then((_) {
       if (!mounted) {
         return;
