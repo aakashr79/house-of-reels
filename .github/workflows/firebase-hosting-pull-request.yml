@@ -15,7 +15,6 @@ jobs:
 
       - name: Get flutter dependencies
         run: flutter pub get
-        working-directory: house-of-reels
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
